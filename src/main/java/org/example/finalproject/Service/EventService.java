@@ -50,4 +50,23 @@ public class EventService {
 
         return totalTickets - soldTickets;
     }
+
+    public void updateEvent(Event updatedEvent) {
+        Event existingEvent = eventRepository.findById(updatedEvent.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid event ID: " + updatedEvent.getId()));
+
+        existingEvent.setName(updatedEvent.getName());
+        existingEvent.setDescription(updatedEvent.getDescription());
+        existingEvent.setDate(updatedEvent.getDate());
+        existingEvent.setLocation(updatedEvent.getLocation());
+        existingEvent.setPrice(updatedEvent.getPrice());
+        existingEvent.setCategory(updatedEvent.getCategory());
+        existingEvent.setQuantity(updatedEvent.getQuantity());
+        if (updatedEvent.getImage() != null) {
+            existingEvent.setImage(updatedEvent.getImage());
+        }
+
+        eventRepository.save(existingEvent);
+    }
+
 }

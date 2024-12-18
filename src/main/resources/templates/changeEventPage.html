@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменить мероприятие</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Изменить мероприятие</h1>
+    <form action="/admin/changeEvent" method="post" enctype="multipart/form-data" class="mt-4">
+        <input type="hidden" name="id" th:value="${event.id}">
+        <div class="form-group">
+            <label for="name">Название</label>
+            <input type="text" class="form-control" id="name" name="name" th:value="${event.name}" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Описание</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required>
+                <span th:text="${event.description}"></span>
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label for="date">Дата</label>
+            <input type="date" class="form-control" id="date" name="date" th:value="${event.date}" required>
+        </div>
+        <div class="form-group">
+            <label for="location">Место проведения</label>
+            <input type="text" class="form-control" id="location" name="location" th:value="${event.location}" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Цена билета</label>
+            <input type="number" class="form-control" id="price" name="price" th:value="${event.price}" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Категория</label>
+            <input type="text" class="form-control" id="category" name="category" th:value="${event.category}" required>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Количество билетов</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" th:value="${event.quantity}" required>
+        </div>
+        <div class="form-group">
+            <label for="file">Фото мероприятия (оставьте пустым, если не хотите менять)</label>
+            <input type="file" class="form-control-file" id="file" name="file" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        <a href="/admin" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+</body>
+</html>

@@ -234,12 +234,16 @@
                 <td th:text="${event.category}">Категория</td>
                 <td th:text="${event.quantity}">50</td>
                 <td>
+                    <form th:action="@{/admin/changeEvent/{id}(id=${event.id})}" method="get" style="display:inline;">
+                        <button type="submit" class="btn btn-warning">Изменить</button>
+                    </form>
                     <form th:action="@{/admin/deleteEvent}" method="post" style="display:inline;">
-                        <input type="hidden" name="id" th:value="${event.id}" />
-                        <input type="hidden" name="_method" value="DELETE" />
+                        <input type="hidden" name="id" th:value="${event.id}">
+                        <input type="hidden" name="_method" value="DELETE">
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить мероприятие?');">Удалить</button>
                     </form>
                 </td>
+
             </tr>
             </tbody>
         </table>

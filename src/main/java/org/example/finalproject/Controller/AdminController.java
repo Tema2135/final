@@ -52,9 +52,18 @@ public class AdminController {
         eventService.saveEvent(event);
         return "redirect:/admin";
     }
+    @GetMapping("/admin/changeEvent/{id}")
+    public String getChangeEventPage(@PathVariable Long id, Model model) {
+        Event event = eventService.getEventById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid event ID: " + id));
+        model.addAttribute("event", event);
+        return "changeEventPage";
+    }
+
     @PostMapping("/admin/changeEvent")
-    public String changeEvent(@ModelAttribute("event") Event event,
-                              @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
+    public String changeEvent(
+            @ModelAttribute("event") Event event,
+            @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
         if (event.getDate().isBefore(LocalDate.now())) {
             return "redirect:/admin?error=due_dateShouldNotBeInThePast";
         }
@@ -64,9 +73,10 @@ public class AdminController {
             event.setImage(file.getOriginalFilename());
         }
 
-        eventService.saveEvent(event);
+        eventService.updateEvent(event);
         return "redirect:/admin";
     }
+
 
 
 
