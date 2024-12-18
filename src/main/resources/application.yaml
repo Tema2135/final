@@ -1,0 +1,27 @@
+spring:
+  web:
+    resources:
+      static-locations: classpath:/static/
+      cache:
+        period: 0
+
+  mail:
+    host: smtp.mail.ru
+    port: 465
+    username: temapernebaev@mail.ru
+    password: kbejAz5EpvG53ZXd3gg0
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+          ssl.enable: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/finalExam
+    username: postgres
+    password: clashofcl
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Список мероприятий</title>
+    <style>
+        /* From Uiverse.io by adamgiebl */
+        button {
+            position: relative;
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 30px;
+            text-align: center;
+            font-size: 18px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: #725AC1;
+            background: transparent;
+            cursor: pointer;
+            transition: ease-out 0.5s;
+            border: 2px solid #725AC1;
+            border-radius: 10px;
+            box-shadow: inset 0 0 0 0 #725AC1;
+        }
+
+        button:hover {
+            color: white;
+            box-shadow: inset 0 -100px 0 0 #725AC1;
+        }
+
+        button:active {
+            transform: scale(0.9);
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            display: block;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .event-card {
+            display: flex;
+            flex-direction: row;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+            margin-bottom: 20px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .event-img img {
+            width: 200px;
+            height: auto;
+        }
+
+        .event-info {
+            flex: 1;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .event-info h1 {
+            font-size: 20px;
+            margin: 0 0 10px;
+            color: #474747;
+        }
+
+        .event-info h2 {
+            font-size: 14px;
+            margin: 0 0 10px;
+            color: #888888;
+            text-transform: uppercase;
+        }
+
+        .event-info p {
+            font-size: 14px;
+            color: #555555;
+            margin: 5px 0;
+        }
+
+        .event-price-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .event-price-btn p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #474747;
+        }
+
+        .event-price-btn button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #9cebd5;
+            color: white;
+            font-size: 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .event-price-btn button:hover {
+            background-color: #79b0a1;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <img src="/img/ЗАКАЗ.png" style="max-width: 200px; max-height: 55px;"></img>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="user">Профиль</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="event">Мероприятия</a>
+                    </li>
+                </ul>
+
+                <a href="logout" style="padding-left: 75%">
+                    <button class="btn btn-primary" type="submit">
+                        Выход
+                    </button>
+                </a>
+
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="wrapper">
+        <div class="event-card" th:each="event : ${events}">
+            <div class="event-img">
+                <img th:src="@{/img/{path}(path=${event.image})}" alt="Event Image">
+            </div>
+            <div class="event-info">
+                <div>
+                    <h1 th:text="${event.name}">Название мероприятия</h1>
+                    <h2 th:text="'Категория: ' + ${event.category}">Категория</h2>
+                    <p th:text="${event.description}">Описание мероприятия</p>
+                    <p><strong>Дата:</strong> <span th:text="${event.date}">2024-12-18</span></p>
+                    <p><strong>Место:</strong> <span th:text="${event.location}">Алматы</span></p>
+                    <p class="quantity"><strong>Осталось билетов:</strong> <span th:text="${event.remainingTickets}">50</span></p>
+                </div>
+                <div class="event-price-btn">
+                    <p><span th:text="${event.price}"></span>₸</p>
+                    <form th:action="@{/event/buy}" method="post" style="display:inline;">
+                        <input type="hidden" name="id" th:value="${event.id}" />
+                        <button class="btn btn-primary" type="submit">
+                            Купить билет
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

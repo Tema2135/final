@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Регистрация</title>
+
+    <meta charset="utf-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-signup {
+            max-width: 380px;
+            padding: 15px 35px 45px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .form-signup-heading {
+            margin-bottom: 30px;
+        }
+
+        .wrapper {
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        .form-control {
+            position: relative;
+            font-size: 16px;
+            height: auto;
+            padding: 10px;
+            margin-bottom: 20px;
+
+            &:focus {
+                z-index: 2;
+            }
+        }
+
+        input[type="password"] {
+            margin-bottom: 20px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        nput[type="text"], input[type="email"], input[type="password"] {
+            margin-bottom: 20px;
+            border-radius: 0;
+        }
+    </style>
+    <head>
+
+
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <img src="/img/ЗАКАЗ.png" style="max-width: 200px; max-height: 55px;"></img>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+
+                </ul>
+
+                <a href="login" style="padding-left: 85%">
+                    <button class="btn btn-primary" type="submit">
+                        Войти
+                    </button>
+                </a>
+                <a href="register" style="padding-left: 1%">
+                    <button class="btn btn-primary" type="submit">
+                        Регистрация
+                    </button>
+                </a>
+
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="wrapper">
+    <form class="form-signup" action="/register" method="POST">
+        <h2 class="form-signup-heading" style="text-align: center">Регистрация</h2>
+        <input type="email" class="form-control" name="username" placeholder="username" required />
+        <input type="password" class="form-control" id="password" name="password" placeholder="password" required />
+        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="confirm password" required />
+
+        <div id="password_error" style="color:#ff0000; display:none;">Пароли не совпадают!</div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Регистрация</button>
+    </form>
+
+</div>
+
+
+
+<script>
+
+        document.querySelector('.form-signup').addEventListener('submit', function(event) {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm_password').value;
+        if (password !== confirmPassword) {
+        event.preventDefault();
+        document.getElementById('password_error').style.display = 'block';
+    }
+    });
+
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Востановление пароля</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="https://unihub.kz/wp-content/themes/unihub/style.css?ver=10">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .form-signin {
+      max-width: 450px;
+      padding: 15px 35px 45px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+    .wrapper {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+    .form-signin-heading,
+    .checkbox {
+      margin-bottom: 30px;
+    }
+    .form-control {
+      position: relative;
+      font-size: 16px;
+      height: auto;
+      padding: 10px;
+    box-sizing(border-box);
+      margin-bottom: 20px;
+
+      &:focus {
+        z-index: 2;
+      }
+    }
+    .password {
+      position: relative;
+    }
+    .password-control {
+      position: absolute;
+      top: 11px;
+      right: 6px;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background: url(https://icons8.com/icon/vmqv135kp5Ty/eye) 0 0 no-repeat;
+
+    }
+    .password-control.view {
+
+    }
+  </style>
+
+</head>
+<body class="page-template-default page page-id-8">
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <img src="/img/ЗАКАЗ.png" style="max-width: 200px; max-height: 55px;"></img>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+
+        </ul>
+
+        <a href="login" style="padding-left: 85%">
+          <button class="btn btn-primary" type="submit">
+            Войти
+          </button>
+        </a>
+        <a href="register" style="padding-left: 1%">
+          <button class="btn btn-primary" type="submit">
+            Регистрация
+          </button>
+        </a>
+
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="wrapper" >
+  <form class="form-signin" action="/forget" method="POST">
+    <h2 class="form-signin-heading" style="text-align: center">Забыли свой пароль?</h2>
+    <label>
+      Введите адрес своей электронной почты для восстановления доступа
+    <input type="text" class="form-control" name="username" placeholder="username" required autofocus=""/>
+    </label>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Восстановить доступ</button>
+  </form>
+
+</div>
+
+<script>
+  function show_hide_password(target){
+    var input = document.getElementById('password-input');
+    if (input.getAttribute('type') == 'password') {
+      target.classList.add('view');
+      input.setAttribute('type', 'text');
+    } else {
+      target.classList.remove('view');
+      input.setAttribute('type', 'password');
+    }
+    return false;
+  }
+</script>
+</body>
+</html>

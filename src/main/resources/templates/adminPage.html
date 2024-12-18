@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Личный кабинет</title>
+    <meta charset="utf-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* From Uiverse.io by adamgiebl */
+        button {
+            position: relative;
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 30px;
+            text-align: center;
+            font-size: 18px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: #725AC1;
+            background: transparent;
+            cursor: pointer;
+            transition: ease-out 0.5s;
+            border: 2px solid #725AC1;
+            border-radius: 10px;
+            box-shadow: inset 0 0 0 0 #725AC1;
+        }
+
+        button:hover {
+            color: white;
+            box-shadow: inset 0 -100px 0 0 #725AC1;
+        }
+
+        button:active {
+            transform: scale(0.9);
+        }
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+        }
+
+        .pagination a.active {
+            background-color: dodgerblue;
+            color: white;
+        }
+
+        .pagination a:hover:not(.active) {background-color: #ddd;}
+        .form-signup {
+            max-width: 600px;
+            padding: 15px 35px 45px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+
+        .form-control {
+            position: relative;
+            font-size: 16px;
+            height: auto;
+            padding: 10px;
+            margin-bottom: 20px;
+
+            &:focus {
+                z-index: 2;
+            }
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        .modal-content {
+
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <img src="/img/ЗАКАЗ.png" style="max-width: 200px; max-height: 55px;"></img>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="user">Профиль</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="event">Мероприятия</a>
+                    </li>
+                </ul>
+
+                <a href="logout" style="padding-left: 75%">
+                    <button class="btn btn-primary" type="submit">
+                        Выход
+                    </button>
+                </a>
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <h1 class="text-center my-4">Управление мероприятиями</h1>
+
+        <button id="myBtn" class="btn btn-success">Добавить мероприятие</button>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeAdd">&times;</span>
+                <form class="form-signup" action="/admin/addEvent" method="post" enctype="multipart/form-data"    >
+                    <h3>Добавить мероприятие</h3>
+                    <input type="text" class="form-control" name="name" placeholder="Название мероприятия" required>
+                    <input type="text" class="form-control" name="description" placeholder="Описание" required>
+                    <input type="date" class="form-control" name="date" required>
+                    <input type="text" class="form-control" name="location" placeholder="Место проведения" required>
+                    <input type="number" class="form-control" name="price" placeholder="Цена билета" required>
+                    <input type="text" class="form-control" name="category" placeholder="Категория" required>
+                    <input type="number" class="form-control" name="quantity" placeholder="Количество билетов" required>
+                    <input type="file" name="file" accept="image/*" required>
+                    <button type="submit" class="btn btn-primary mt-3">Добавить</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="postModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="postSpan">&times;</span>
+                <form class="form-signup" action="/admin/addEvent" method="post" enctype="multipart/form-data"    >
+                    <h3>Добавить мероприятие</h3>
+                    <input type="text" class="form-control" name="name" placeholder="Название мероприятия" required>
+                    <input type="text" class="form-control" name="description" placeholder="Описание" required>
+                    <input type="date" class="form-control" name="date" required>
+                    <input type="text" class="form-control" name="location" placeholder="Место проведения" required>
+                    <input type="number" class="form-control" name="price" placeholder="Цена билета" required>
+                    <input type="text" class="form-control" name="category" placeholder="Категория" required>
+                    <input type="number" class="form-control" name="quantity" placeholder="Количество билетов" required>
+                    <input type="file" name="file" accept="image/*" required>
+                    <button type="submit" class="btn btn-primary mt-3">Добавить</button>
+                </form>
+            </div>
+        </div>
+
+        <table class="table table-bordered mt-4">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}">1</td>
+                <td th:text="${user.username}">username</td>
+                <td th:text="${user.role}">role</td>
+                <td>
+                    <form th:action="@{/admin/deleteUser}" method="post" style="display:inline;">
+                        <input type="hidden" name="id" th:value="${user.id}" />
+                        <input type="hidden" name="_method" value="DELETE" />
+                        <button class="btn btn-danger" type="submit" onclick="return confirm('Вы уверены, что хотите удалить этого пользователя?');">
+                            Удалить
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- Таблица мероприятий -->
+        <table class="table table-bordered mt-4">
+
+            <thead>
+            <tr>
+                <th>Фото</th>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Дата</th>
+                <th>Место</th>
+                <th>Цена</th>
+                <th>Категория</th>
+                <th>Количество</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="event : ${events}">
+                <td>
+                    <img th:src="@{/img/{path}(path=${event.image})}"
+                         style="max-width: 100px; max-height: 100px;">
+                </td>
+                <td th:text="${event.id}">1</td>
+                <td th:text="${event.name}">Название</td>
+                <td th:text="${event.description}">Описание</td>
+                <td th:text="${event.date}">2024-05-01</td>
+                <td th:text="${event.location}">Место</td>
+                <td th:text="${event.price}">1000</td>
+                <td th:text="${event.category}">Категория</td>
+                <td th:text="${event.quantity}">50</td>
+                <td>
+                    <form th:action="@{/admin/deleteEvent}" method="post" style="display:inline;">
+                        <input type="hidden" name="id" th:value="${event.id}" />
+                        <input type="hidden" name="_method" value="DELETE" />
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить мероприятие?');">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        var myModals = document.getElementById("myModal");
+        var myBtn = document.getElementById("myBtn");
+        var mySpan = document.getElementById("mySpan");
+
+        var postModals = document.getElementById("postModal");
+        var postBtn = document.getElementById("postBtn");
+        var postSpan = document.getElementById("postSpan");
+        myBtn.onclick = function() {
+            myModals.style.display = "block";
+        }
+
+        postBtn.onclick=function (){
+            postModals.style.display="block";
+        }
+
+        mySpan.onclick = function() {
+            myModals.style.display = "none";
+        }
+
+        postSpan.onclick = function() {
+            postModals.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == myModals && myModals.style.display=="block") {
+                myModals.style.display = "none";
+            }
+
+            if(event.target==postModals && postModals.style.display=="block"){
+                postModals.style.display="none";
+            }
+        }
+    </script>
+</main>
+</body>
+</html>
