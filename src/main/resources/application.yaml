@@ -8,8 +8,8 @@ spring:
   mail:
     host: smtp.mail.ru
     port: 465
-    username: temapernebaev@mail.ru
-    password: kbejAz5EpvG53ZXd3gg0
+    username:
+    password: 
     properties:
       mail:
         smtp:
@@ -19,8 +19,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/finalExam
-    username: postgres
-    password: clashofcl
+    username: 
+    password: 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
